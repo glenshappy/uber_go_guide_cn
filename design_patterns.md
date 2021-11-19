@@ -6,7 +6,7 @@
 但是Go语言并没有提供默认参数，一旦一个对象有很多属性（这些属性都可以有默认值）的时候，生成一个对象会变得及其麻烦。
 
 比如我们要生成一个叫张三的人，当然张三还有其他的特性，比如身高，国籍，性别，年龄等，但是我们暂时除了他的名字之外啥都不知道，那么我们可以将其他值设置为一个默认的值。
-
+```
 type Person struct {
 	Name string
 	Age int
@@ -25,13 +25,13 @@ func main()  {
 		Address: "unknown",	// 不知道，直接填写“unknown”
 	}
 ｝
-
+```
 
 可以看到这样写的话初试化一个对象很长，特别是当一个对象有更多的特性的时候，上面的初始化会显得冗长。
 
 解决方案：函数式选项（Functional Options）
 巧妙的利用了闭包和可变参数来做到给一个对象设置默认参数。具体解析在代码注释中。
-
+```
 package functionOptions
 
 // 对象人
@@ -84,9 +84,9 @@ func NewPerson(name string, settings ...per) *Person  {
 	}
 	return person
 }
-
+```
 用法：
-
+```
 package main
 
 import (
@@ -100,7 +100,7 @@ func main()  {
 	person2 := op.NewPerson("Mary", op.Gender("Female"), op.Country("Japan"))
 	fmt.Println(person2)
 }
-
+```
 
 输出结果对比：
 
